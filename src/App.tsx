@@ -28,11 +28,6 @@ function App() {
     password: "",
   });
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log(user);
-  };
-
   const updateFields = (fields: Partial<UserInfoData>) => {
     setUser((prev) => ({ ...prev, ...fields }));
   };
@@ -43,6 +38,16 @@ function App() {
       <Address {...user} updateFields={updateFields} />,
       <Account {...user} updateFields={updateFields} />,
     ]);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (isLastStep) return submitForm();
+    next();
+  };
+
+  const submitForm = () => {
+    alert("Form submitted");
+  };
 
   return (
     <div className="App">
