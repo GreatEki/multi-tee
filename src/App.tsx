@@ -1,17 +1,48 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "src/components";
 import UserDetails from "src/views/UserDetails/UserDetails";
 import Address from "src/views/Address/Address";
 import Account from "src/views/Account/Account";
 import { useMultiStepForm } from "src/hooks/useMultiStepForm";
 
-function App() {
-  const { steps, currentStep, stepIndex, isFirstStep, isLastStep, next, back } =
-    useMultiStepForm([<UserDetails />, <Address />, <Account />]);
+interface UserInfoData {
+  firstName: string;
+  lastName: string;
+  age: string;
+  street: string;
+  city: string;
+  state: string;
+  email: string;
+  password: string;
+}
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
-  }
+function App() {
+  const [user, setUser] = useState<UserInfoData>({
+    firstName: "",
+    lastName: "",
+    age: "",
+    street: "",
+    city: "",
+    state: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(user);
+  };
+
+  const updateFields = (fields: Partial<UserInfoData>) => {
+    setUser((prev) => ({ ...prev, ...fields }));
+  };
+
+  const { steps, currentStep, stepIndex, isFirstStep, isLastStep, next, back } =
+    useMultiStepForm([
+      <UserDetails updateFields={updateFields} />,
+      <Address />,
+      <Account />,
+    ]);
 
   return (
     <div className="App">
@@ -19,18 +50,21 @@ function App() {
         {" "}
         {stepIndex + 1} / {steps.length}{" "}
       </h5>
-      {currentStep}
-      <section className="btn-area">
-        {!isFirstStep && (
-          <div>
-            <Button btnText="Back" onClick={back} />
-          </div>
-        )}
+      <form onSubmit={handleSubmit}>
+        {currentStep}
 
-        <div>
-          <Button btnText={isLastStep ? "Finish" : "Next"} onClick={next} />
-        </div>
-      </section>
+        <section className="btn-area">
+          {!isFirstStep && (
+            <div>
+              <Button btnType="button" btnText="Back" onClick={back} />
+            </div>
+          )}
+
+          <div>
+            <Button btnType="submit" btnText={isLastStep ? "Finish" : "Next"} />
+          </div>
+        </section>
+      </form>
     </div>
   );
 }

@@ -1,31 +1,46 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { Input, Label, Button } from "src/components";
 import UserDetailsCSS from "./UserDetails.module.css";
 
-interface Props {}
+type UserData = {
+  firstName: string;
+  lastName: string;
+  age: string;
+};
 
-const UserDetails = (props: Props) => {
-  function handleChange() {}
+interface Props {
+  updateFields: (field: Partial<UserData>) => void;
+}
 
-  function handleNext() {}
+const UserDetails = (props: Props): JSX.Element => {
   return (
-    <div>
-      <form>
-        <h3 className="form-caption"> User Details </h3>
-        <div className={UserDetailsCSS.formItem}>
-          <Label> First Name </Label>
-          <Input type="text" onChange={handleChange} />
-        </div>
-        <div className={UserDetailsCSS.formItem}>
-          <Label> Last Name </Label>
-          <Input type="text" onChange={handleChange} />
-        </div>
-        <div className={UserDetailsCSS.formItem}>
-          <Label> Age </Label>
-          <Input type="text" onChange={handleChange} />
-        </div>
-      </form>
-    </div>
+    <>
+      <h3 className="form-caption"> User Details </h3>
+      <div className={UserDetailsCSS.formItem}>
+        <Label> First Name </Label>
+        <Input
+          type="text"
+          required
+          onChange={(e) => props.updateFields({ firstName: e.target.value })}
+        />
+      </div>
+      <div className={UserDetailsCSS.formItem}>
+        <Label> Last Name </Label>
+        <Input
+          type="text"
+          required
+          onChange={(e) => props.updateFields({ lastName: e.target.value })}
+        />
+      </div>
+      <div className={UserDetailsCSS.formItem}>
+        <Label> Age </Label>
+        <Input
+          type="text"
+          required
+          onChange={(e) => props.updateFields({ age: e.target.value })}
+        />
+      </div>
+    </>
   );
 };
 
