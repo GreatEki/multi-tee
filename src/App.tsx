@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Button } from "src/components";
 import UserDetails from "src/views/UserDetails/UserDetails";
+import Address from "src/views/Address/Address";
 import { useMultiStepForm } from "src/hooks/useMultiStepForm";
 
 function App() {
-  const { steps, currentStep, stepIndex, next, back } = useMultiStepForm([]);
+  const { steps, currentStep, stepIndex, next, back } = useMultiStepForm([
+    <UserDetails />,
+    <Address />,
+  ]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     console.log(e.target.value);
@@ -12,8 +16,11 @@ function App() {
 
   return (
     <div className="App">
-      <UserDetails currentStep={stepIndex + 1} />
-
+      <h5 className="step">
+        {" "}
+        {stepIndex + 1} / {steps.length}{" "}
+      </h5>
+      {currentStep}
       <section className="btn-area">
         <div>
           <Button btnText="Back" onClick={back} />
