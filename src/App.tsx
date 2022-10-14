@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Input } from "src/components";
+import UserDetails from "src/views/UserDetails/UserDetails";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -10,9 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <form>
-        <Input type="text" onChange={handleChange} />
-      </form>
+      <UserDetails />
     </div>
   );
 }

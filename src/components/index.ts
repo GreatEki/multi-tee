@@ -1,3 +1,4 @@
 import Input from "./Input/Input";
+import Label from "./Label/Label";
 
-export { Input };
+export { Input, Label };
