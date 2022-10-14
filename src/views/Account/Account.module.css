@@ -1,0 +1,16 @@
+
+.formItem {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formItem:first-child {
+    flex: 1;
+}
+
+.formItem:nth-child(2) {
+    flex: 1
+}
