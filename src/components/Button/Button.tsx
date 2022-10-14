@@ -8,7 +8,9 @@ const Button: React.FC<Props> = (props) => {
   const { btnText, onClick } = props;
   return (
     <div>
-      <button onClick={onClick}>{btnText}</button>
+      <button type="button" onClick={onClick}>
+        {btnText}
+      </button>
     </div>
   );
 };

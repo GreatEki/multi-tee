@@ -9,7 +9,11 @@ interface Props {
 const Input: React.FC<Props> = (props) => {
   return (
     <div>
-      <input type={props.type} onChange={props.onChange} />
+      <input
+        className={InputCSS.input}
+        type={props.type}
+        onChange={props.onChange}
+      />
     </div>
   );
 };

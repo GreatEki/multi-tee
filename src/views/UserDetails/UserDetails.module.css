@@ -1,16 +1,10 @@
-.form {
-    border: 1px solid black;
-    padding: 20px;
-    border-radius: 3px;
-    width: fit-content;
-    margin: 0 auto;
-}
 
 .formItem {
     display: flex;
     gap: 40px;
     margin: 20px 0;
     justify-content: space-between;
+    align-items: center;
 }
 
 .formItem:first-child {
