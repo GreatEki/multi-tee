@@ -2,27 +2,37 @@ import React from "react";
 import { Input, Label, Button } from "src/components";
 import AccountCSS from "./Account.module.css";
 
-interface Props {}
+interface AccountData {
+  email: string;
+  password: string;
+}
+
+type Props = AccountData & {
+  updateFields: (fields: Partial<AccountData>) => void;
+};
 
 const Account = (props: Props) => {
-  function handleChange() {}
+  const { email, password, updateFields } = props;
 
-  function handleNext() {}
   return (
     <div>
       <form>
         <h3 className="form-caption"> Account </h3>
         <div className={AccountCSS.formItem}>
-          <Label> First Name </Label>
-          <Input type="text" onChange={handleChange} />
+          <Label> Email </Label>
+          <Input
+            value={email}
+            type="text"
+            onChange={(e) => updateFields({ email: e.target.value })}
+          />
         </div>
         <div className={AccountCSS.formItem}>
-          <Label> Last Name </Label>
-          <Input type="text" onChange={handleChange} />
-        </div>
-        <div className={AccountCSS.formItem}>
-          <Label> Age </Label>
-          <Input type="text" onChange={handleChange} />
+          <Label> Password </Label>
+          <Input
+            type="text"
+            value={password}
+            onChange={(e) => updateFields({ password: e.target.value })}
+          />
         </div>
       </form>
     </div>

@@ -8,11 +8,12 @@ type UserData = {
   age: string;
 };
 
-interface Props {
+type Props = UserData & {
   updateFields: (field: Partial<UserData>) => void;
-}
+};
 
 const UserDetails = (props: Props): JSX.Element => {
+  const { firstName, lastName, age, updateFields } = props;
   return (
     <>
       <h3 className="form-caption"> User Details </h3>
@@ -20,8 +21,9 @@ const UserDetails = (props: Props): JSX.Element => {
         <Label> First Name </Label>
         <Input
           type="text"
+          value={firstName}
           required
-          onChange={(e) => props.updateFields({ firstName: e.target.value })}
+          onChange={(e) => updateFields({ firstName: e.target.value })}
         />
       </div>
       <div className={UserDetailsCSS.formItem}>
@@ -29,15 +31,17 @@ const UserDetails = (props: Props): JSX.Element => {
         <Input
           type="text"
           required
-          onChange={(e) => props.updateFields({ lastName: e.target.value })}
+          value={lastName}
+          onChange={(e) => updateFields({ lastName: e.target.value })}
         />
       </div>
       <div className={UserDetailsCSS.formItem}>
         <Label> Age </Label>
         <Input
           type="text"
+          value={age}
           required
-          onChange={(e) => props.updateFields({ age: e.target.value })}
+          onChange={(e) => updateFields({ age: e.target.value })}
         />
       </div>
     </>

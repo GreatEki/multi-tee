@@ -3,6 +3,7 @@ import InputCSS from "./Input.module.css";
 
 interface Props {
   type: string;
+  value: any;
   required?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -15,6 +16,7 @@ const Input: React.FC<Props> = (props) => {
         type={props.type}
         required={props.required}
         onChange={props.onChange}
+        value={props.value}
       />
     </div>
   );
